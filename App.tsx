@@ -25,6 +25,7 @@ const App: React.FC = () => {
     if (!contentRef.current) return;
     const observer = new ResizeObserver((entries) => {
       for (let entry of entries) {
+        // Use scrollHeight to ensure we capture the full content including sources
         setContentHeight(entry.target.scrollHeight);
       }
     });
@@ -34,41 +35,42 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8F8FA] overflow-x-hidden">
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#7A6E94]/10 px-8 py-4 flex justify-between items-center shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-[#5D5276] rounded-lg flex items-center justify-center text-white font-serif font-bold">W</div>
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-[#7A6E94]/10 px-10 py-5 flex justify-between items-center shadow-sm">
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 bg-[#5D5276] rounded-[12px] flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg">W</div>
           <div>
-            <h1 className="font-serif text-lg font-bold text-[#5D5276] leading-none text-left">Wellness Studio</h1>
-            <p className="text-[9px] text-[#7A6E94] uppercase tracking-[0.2em] font-black mt-1 text-left">Digital Publication</p>
+            <h1 className="font-serif text-xl font-black text-[#5D5276] leading-none text-left tracking-tight italic">Wellness</h1>
+            <p className="text-[10px] text-[#7A6E94] uppercase tracking-[0.4em] font-black mt-1.5 text-left opacity-70">Guide Edition</p>
           </div>
         </div>
 
-        <nav className="flex gap-1 bg-[#F8F8FA] p-1 rounded-xl border border-[#7A6E94]/10">
+        <nav className="flex gap-2 bg-[#F8F8FA] p-1.5 rounded-2xl border border-[#7A6E94]/10 shadow-inner">
           <button 
             onClick={() => setActivePage('PAGE_1')}
-            className={`px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activePage === 'PAGE_1' ? 'bg-white text-[#5D5276] shadow-sm border border-[#7A6E94]/10' : 'text-[#7A6E94] hover:bg-white/50'}`}
+            className={`px-8 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${activePage === 'PAGE_1' ? 'bg-white text-[#5D5276] shadow-lg border border-[#7A6E94]/10' : 'text-[#7A6E94] hover:bg-white/50'}`}
           >
-            Page 1
+            Page 1: The Guide
           </button>
           <button 
             onClick={() => setActivePage('PAGE_2')}
-            className={`px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all ${activePage === 'PAGE_2' ? 'bg-white text-[#5D5276] shadow-sm border border-[#7A6E94]/10' : 'text-[#7A6E94] hover:bg-white/50'}`}
+            className={`px-8 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${activePage === 'PAGE_2' ? 'bg-white text-[#5D5276] shadow-lg border border-[#7A6E94]/10' : 'text-[#7A6E94] hover:bg-white/50'}`}
           >
-            Page 2
+            Page 2: The Tracker
           </button>
         </nav>
       </header>
 
-      <main className="flex-grow flex flex-col items-center py-12 px-6">
+      <main className="flex-grow flex flex-col items-center py-16 px-8">
         <div 
           className="flex justify-center w-full"
           style={{ 
             height: `${contentHeight * scale}px`,
-            transition: 'height 0.3s ease-out'
+            transition: 'height 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
           <div 
             ref={contentRef}
+            className="animate-in fade-in zoom-in-95 duration-700 ease-out"
             style={{ 
               width: `${targetWidth}px`,
               transform: `scale(${scale})`, 
@@ -81,9 +83,9 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      <footer className="py-12 px-8 text-center border-t border-[#7A6E94]/10 bg-white">
-        <p className="text-[#7A6E94] text-[10px] font-bold uppercase tracking-[0.4em] mb-4">
-          Wellness Magazine &copy; 2024
+      <footer className="py-16 px-10 text-center border-t border-[#7A6E94]/10 bg-white">
+        <p className="text-[#7A6E94] text-[11px] font-black uppercase tracking-[0.5em] mb-4 opacity-40 italic">
+          Wellness Magazine Workspace &copy; 2024
         </p>
       </footer>
     </div>
@@ -91,6 +93,7 @@ const App: React.FC = () => {
 };
 
 export default App;
+
 
 
 
