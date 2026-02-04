@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { GoogleGenAI } from '@google/genai';
-import { AspectRatio, VideoGenerationState } from '../types';
+import { AspectRatio, VideoGenerationState } from './types';
 
 const VeoStudio: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -26,14 +26,6 @@ const VeoStudio: React.FC = () => {
     setState({ status: 'checking_key', progressMessage: 'Verifying API Access...' });
 
     try {
-      // @ts-ignore
-      const hasKey = await window.aistudio.hasSelectedApiKey();
-      if (!hasKey) {
-        // @ts-ignore
-        await window.aistudio.openSelectKey();
-        // Proceeding as per instructions: assume success after triggering dialog
-      }
-
       setState({ status: 'generating', progressMessage: 'Initializing Veo 3.1 Fast...' });
 
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
@@ -73,10 +65,6 @@ const VeoStudio: React.FC = () => {
 
     } catch (err: any) {
       console.error(err);
-      if (err.message?.includes("Requested entity was not found")) {
-        // @ts-ignore
-        await window.aistudio.openSelectKey();
-      }
       setState({ status: 'error', error: err.message || 'Failed to animate image.' });
     }
   };
@@ -92,7 +80,6 @@ const VeoStudio: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* Input Controls */}
         <div className="space-y-8 bg-white p-8 rounded-[2rem] shadow-sm border border-[#7A6E94]/10">
           <div>
             <label className="block text-xs font-bold uppercase tracking-widest text-[#7A6E94] mb-4">
@@ -153,7 +140,6 @@ const VeoStudio: React.FC = () => {
           </button>
         </div>
 
-        {/* Output Area */}
         <div className="space-y-6">
           <div className={`aspect-[9/16] max-h-[600px] w-full mx-auto rounded-[2rem] border border-[#7A6E94]/10 bg-white overflow-hidden shadow-lg flex flex-col items-center justify-center p-8 text-center transition-all ${aspectRatio === AspectRatio.LANDSCAPE ? 'aspect-[16/9]' : ''}`}>
             {state.status === 'idle' && (
@@ -169,9 +155,6 @@ const VeoStudio: React.FC = () => {
                 <div>
                   <h3 className="text-[#5D5276] font-serif text-xl mb-2">Creating Magic...</h3>
                   <p className="text-[#7A6E94] text-sm animate-pulse">{state.progressMessage}</p>
-                </div>
-                <div className="bg-[#F8F8FA] p-4 rounded-xl text-[10px] text-[#7A6E94] max-w-[200px] mx-auto">
-                   Video generation can take a few minutes. Don't worry, it's worth the wait.
                 </div>
               </div>
             )}
@@ -194,17 +177,6 @@ const VeoStudio: React.FC = () => {
               </div>
             )}
           </div>
-          
-          {state.status === 'completed' && (
-             <div className="bg-[#98DDC8]/20 border border-[#98DDC8] p-4 rounded-xl flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#98DDC8] flex items-center justify-center text-[#5D5276]">
-                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                   </svg>
-                </div>
-                <p className="text-sm text-[#5D5276] font-medium">Generation successful! View your new cinematic clip above.</p>
-             </div>
-          )}
         </div>
       </div>
     </div>
@@ -212,3 +184,4 @@ const VeoStudio: React.FC = () => {
 };
 
 export default VeoStudio;
+
