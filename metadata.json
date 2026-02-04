@@ -1,0 +1,7 @@
+{
+  "name": "Wellness Magazine Assistant",
+  "description": "A high-end layout and copy assistant for wellness editorial content, featuring AI-powered video generation and professional copywriting tools.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
