@@ -7,18 +7,18 @@ export interface MagazineContent {
   disclaimer: string;
 }
 
-// AspectRatio enum for video generation configuration
+// Added missing AspectRatio enum for video generation scaling
 export enum AspectRatio {
   PORTRAIT = 'PORTRAIT',
   LANDSCAPE = 'LANDSCAPE',
 }
 
-// VideoGenerationState to track the status and progress of the Veo video generation process
-export type VideoGenerationState =
-  | { status: 'idle' }
-  | { status: 'checking_key'; progressMessage: string }
-  | { status: 'generating'; progressMessage: string }
-  | { status: 'polling'; progressMessage: string }
-  | { status: 'completed'; videoUri: string }
-  | { status: 'error'; error: string };
+// Added missing VideoGenerationState interface to track progress and output
+export interface VideoGenerationState {
+  status: 'idle' | 'checking_key' | 'generating' | 'polling' | 'completed' | 'error';
+  progressMessage?: string;
+  videoUri?: string;
+  error?: string;
+}
+
 
