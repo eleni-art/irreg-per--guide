@@ -1,4 +1,3 @@
-
 export type PageType = 'PAGE_1' | 'PAGE_2';
 
 export interface MagazineContent {
@@ -8,14 +7,18 @@ export interface MagazineContent {
   disclaimer: string;
 }
 
+// AspectRatio enum for video generation configuration
 export enum AspectRatio {
-  LANDSCAPE = '16:9',
-  PORTRAIT = '9:16'
+  PORTRAIT = 'PORTRAIT',
+  LANDSCAPE = 'LANDSCAPE',
 }
 
-export interface VideoGenerationState {
-  status: 'idle' | 'checking_key' | 'generating' | 'polling' | 'completed' | 'error';
-  videoUri?: string;
-  error?: string;
-  progressMessage?: string;
-}
+// VideoGenerationState to track the status and progress of the Veo video generation process
+export type VideoGenerationState =
+  | { status: 'idle' }
+  | { status: 'checking_key'; progressMessage: string }
+  | { status: 'generating'; progressMessage: string }
+  | { status: 'polling'; progressMessage: string }
+  | { status: 'completed'; videoUri: string }
+  | { status: 'error'; error: string };
+
