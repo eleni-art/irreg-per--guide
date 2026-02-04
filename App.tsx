@@ -39,13 +39,12 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8F8FA] overflow-x-hidden">
-      {/* Top Navigation Bar */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#7A6E94]/10 px-8 py-4 flex justify-between items-center shadow-sm">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-[#5D5276] rounded-lg flex items-center justify-center text-white font-serif font-bold">W</div>
           <div>
-            <h1 className="font-serif text-lg font-bold text-[#5D5276] leading-none">Wellness Studio</h1>
-            <p className="text-[9px] text-[#7A6E94] uppercase tracking-[0.2em] font-black mt-1">Assistant Dashboard</p>
+            <h1 className="font-serif text-lg font-bold text-[#5D5276] leading-none text-left">Wellness Studio</h1>
+            <p className="text-[9px] text-[#7A6E94] uppercase tracking-[0.2em] font-black mt-1 text-left">Assistant Dashboard</p>
           </div>
         </div>
 
@@ -128,13 +127,11 @@ const App: React.FC = () => {
         <p className="text-[#7A6E94] text-[10px] font-bold uppercase tracking-[0.4em] mb-4">
           Wellness Magazine Workspace &copy; 2024
         </p>
-        <p className="text-[#7A6E94]/40 text-[9px] italic max-w-md mx-auto">
-          Experimental AI-Assisted Creative Studio for Wellness Editorial.
-        </p>
       </footer>
     </div>
   );
 };
 
 export default App;
+
 
